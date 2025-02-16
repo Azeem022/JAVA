@@ -1,0 +1,135 @@
+==================================What is a method in Java programming?
+ Java Method is a collection of statements that perform some specific task and return the result to the caller. 
+
+
+===================What are parts of method in Java?
+ The 5 methods parts in Java are mentioned below: 
+
+
+ Modifiers 
+ Return Type 
+ Method Name 
+ Parameters 
+ Method Body 
+=======================================Is java support method overloading?
+Yes, Java supports Method overloading but changing there parameter and return type.
+=======================================What are the types of methods in Java?
+There are mainly 2 types of methods in Java
+
+
+Instance methods
+Static methods
+
+=======================================What is the main difference between Constructor and Method in Java?
+A method is a block of code which perform certain tasks, but constructor is a special type of method. which used to initialize objects when they are created and have a same name as a class.
+
+====================================Calling the Static Methods
+Static methods belong to the class and can be called without creating an object.
+// Java Program to call Static Methods
+import java.io.*;
+
+class test {
+  
+    // Static method
+    static void hello()
+    {
+        System.out.println("Hello");
+    }
+}
+
+class GFG {
+
+    public static void main(String[] args) {
+      
+        // calling the Method 1
+        // Accessing method
+        test.hello();
+    }
+}
+================================Static Method vs Instance Method in Java
+Last Updated : 02 Jan, 2025
+In Java, methods are mainly divided into two parts based on how they are associated with a class, which are the static method and the Instance method. The main difference between static and instance methods is:
+
+Static method: This method belongs to the class and can be called without creating an object.
+Memory Allocation of Static Methods: Static methods belong to the class, not its objects, and they are stored in the Permanent Generation space of the heap. Their local variables and arguments are stored in the stack. They can be called without creating an instance of the class, using ClassName.methodName(args).
+
+Important Points:
+
+Static methods are shared among all objects of the class.
+They cannot be overridden as they use static binding at compile time.
+If both superclass and subclass have static methods with the same name, it is called Method Hiding, where the subclass method hides the superclass method.
+
+
+Instance method: This method belongs to an object and requires an object to be called.
+Memory Allocation of Instance Method: Instance methods are stored in the Permanent Generation space of the heap (till Java 7, replaced by Metaspace from Java 8 for better efficiency). Their parameters, local variables, and return values are allocated on the stack. They can be called within their class or from other classes, based on their access modifiers.
+
+Important Points:
+
+Instance methods belong to the object, not the class, and require an object to be called.
+They are stored in one memory location and identify their object through the this pointer.
+They can be overridden as they use dynamic binding at runtime.
+
+=============================When to use static methods? 
+Use static methods when:
+The method does not depend on the state of an object.
+Code can be shared across all objects of a class (e.g., utility methods).
+
+===========================What are access modifiers in Java?
+Access modifiers in Java are the keywords that are used for controlling the use of the methods, constructors, fields, and methods in a class.
+
+What is the default access modifier in Java?
+The default access modifier allows access within the same package only.
+
+Can a private method be accessed outside its class?
+No, a private method is only accessible within its own class.
+
+
+What does the protected access modifier do?
+The protected modifier allows access within the same package and by subclasses.
+
+
+Can public variables be accessed from any class?
+Yes, public variables are accessible from any class, regardless of the package.
+
+=================================How can we initialize an array in Java?
+Arrays in Java can be initialized in several ways:
+
+
+Static Initialization: int[] arr = {1, 2, 3};
+Dynamic Initialization: int[] arr = new int[5];
+Initialization with a loop: for (int i = 0; i < arr.length; i++) { arr[i] = i + 1; }
+@
+==============================Can we change the size of an array after it is created in Java?
+No, the size of an array in Java cannot be changed once it is initialized. Arrays are fixed-size. To work with a dynamically sized collection, consider using classes from the java.util package, such as ArrayList.
+
+=========================What is the direct superclass of an array in Java?
+The direct superclass of an array in Java is Object . Arrays inherit methods from the Object class, including toString(), equals(), and hashCode(). 
+
+
+=============================taking user input using for loop in java 
+package Basics2;
+import java.io.PrintStream;
+import java.util.Scanner;
+public class UserInput {
+    public static void main(String[] args) {
+        Scanner object = new Scanner(System.in);
+        System.out.println("Enter the value of row :");
+        int row = object.nextInt();
+        System.out.println("Enter the value of column :");
+        int column = object.nextInt();
+        int [][] array = new int[row][column];
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                array[i][j] = object.nextInt();
+            }
+        }
+        System.out.println("You Entered 2D array is :");
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                System.out.print(array[i][j]+" ");
+            }
+            System.out.println();
+        }
+    }
+}
+

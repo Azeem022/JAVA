@@ -1,0 +1,46 @@
+==========================Remove Duplicates from Sorted Array
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        int j=0;
+        for(int i=0;i<nums.length;i++){
+            if(nums[j]!=nums[i]){
+                j++;
+                nums[j]=nums[i];
+            }
+        }
+        return j=j+1;
+    }
+}
+
+=======================Best Time to Buy and Sell Stock II
+class Solution {
+    public int maxProfit(int[] prices) {
+        int profit = 0;
+        for(int i=0;i<prices.length-1;i++){
+            if(prices[i]<prices[i+1]){
+                profit = profit+(prices[i+1]-prices[i]);
+            }
+        }
+        return profit;
+    }
+}
+
+=============================Rotate Array
+class Solution {
+    public void rotate(int[] nums, int k) {
+        k=k%nums.length;
+        reverse(nums, 0, nums.length-1);
+        reverse(nums, 0, k-1);
+        reverse(nums, k, nums.length-1);
+    }
+    public void reverse(int [] nums, int start, int end){
+    while(start<end){
+        int temp = nums[start];
+        nums[start]= nums[end];
+        nums[end] = temp;
+        start++;
+        end--;
+    }
+}
+}
+

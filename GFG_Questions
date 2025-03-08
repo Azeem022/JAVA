@@ -1,0 +1,137 @@
+=====================================Second Largest Element in an Array
+package Basics2;
+
+import java.util.Scanner;
+
+public class SecondLargestElement {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the number of elements in the array: ");
+        int n = scanner.nextInt();
+        int[] arr = new int[n];
+
+        System.out.println("Enter the elements of the array:");
+        for (int i = 0; i < n; i++) {
+            arr[i] = scanner.nextInt();
+        }
+
+        int largest = Integer.MIN_VALUE;
+        int secondLargest = Integer.MIN_VALUE;
+
+        for (int i = 0; i < n; i++) {
+            if (arr[i] > largest) {
+                secondLargest = largest;
+                largest = arr[i];
+            } else if (arr[i] > secondLargest && arr[i] != largest) {
+                secondLargest = arr[i];
+            }
+        }
+
+        if (secondLargest == Integer.MIN_VALUE) {
+            System.out.println("There is no second largest element.");
+        } else {
+            System.out.println("The second largest element is: " + secondLargest);
+        }
+
+        scanner.close();
+    }
+}
+
+
+====================================Max Consecutive Ones
+import java.util.Scanner;
+
+public class MaxConsecutiveOnes {
+    public static void main(String[] args) {
+        // Create a scanner object to take user input
+        Scanner scanner = new Scanner(System.in);
+
+        // Ask user for the size of the array
+        System.out.print("Enter the size of binary array: ");
+        int n = scanner.nextInt();
+
+        // Create an array of size n
+        int[] arr = new int[n];
+
+        // Ask user to enter the binary array elements (0 or 1)
+        System.out.println("Enter the elements :");
+        for (int i = 0; i < n; i++) {
+            arr[i] = scanner.nextInt();
+        }
+
+        // Variables to track the current and maximum count of consecutive 1s
+        int currentCount = 0;
+        int maxCount = 0;
+
+        // Loop through the array
+        for (int i = 0; i < n; i++) {
+            if (arr[i] == 1) {
+                currentCount++;  // Increment current streak of 1s
+                maxCount = Math.max(maxCount, currentCount);  // Update max count if necessary
+            } else {
+                currentCount = 0;  // Reset the current streak when we encounter a 0
+            }
+        }
+
+        // Output the result
+        System.out.println("The maximum number of consecutive is: " + maxCount);
+
+        // Close the scanner
+        scanner.close();
+    }
+}
+
+
+========================Move All Zeroes To End
+
+import java.util.Scanner;
+
+public class MoveZeroesToEnd {
+    public static void main(String[] args) {
+        // Create a scanner object to take user input
+        Scanner scanner = new Scanner(System.in);
+
+        // Ask user for the size of the array
+        System.out.print("Enter the number of elements in the array: ");
+        int n = scanner.nextInt();
+
+        // Create an array of size n
+        int[] arr = new int[n];
+
+        // Ask user to enter the elements of the array
+        System.out.println("Enter the elements of the array (0 or any other integers):");
+        for (int i = 0; i < n; i++) {
+            arr[i] = scanner.nextInt();
+        }
+
+        // Call the function to move zeroes to the end
+        moveZeroesToEnd(arr);
+
+        // Output the array after moving zeroes
+        System.out.println("Array after moving zeroes to the end:");
+        for (int i : arr) {
+            System.out.print(i + " ");
+        }
+
+        // Close the scanner
+        scanner.close();
+    }
+
+    // Function to move zeroes to the end
+    public static void moveZeroesToEnd(int[] arr) {
+        int lastNonZeroIndex = 0;  // Pointer for the last non-zero element
+        
+        // Traverse the array
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] != 0) {
+                // Swap arr[i] with arr[lastNonZeroIndex]
+                int temp = arr[i];
+                arr[i] = arr[lastNonZeroIndex];
+                arr[lastNonZeroIndex] = temp;
+                
+                // Increment the lastNonZeroIndex pointer
+                lastNonZeroIndex++;
+            }
+        }
+    }
+}

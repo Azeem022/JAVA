@@ -133,3 +133,743 @@ public class UserInput {
     }
 }
 
+
+================================ METHOD ==================================
+🚀 LEVEL 0: Basic Method With No Parameters and No Return
+java
+Copy
+Edit
+public class HelloWorld {
+    public void greet() {
+        System.out.println("Hello, World!");
+    }
+
+    public static void main(String[] args) {
+        HelloWorld obj = new HelloWorld();
+        obj.greet();  // Output: Hello, World!
+    }
+}
+
+
+
+🚀 LEVEL 1: Method With Parameters (Inputs) and void Return
+java
+Copy
+Edit
+public class Printer {
+    public void printName(String name) {
+        System.out.println("Your name is: " + name);
+    }
+
+    public static void main(String[] args) {
+        Printer p = new Printer();
+        p.printName("Rahul");  // Output: Your name is: Rahul
+    }
+}
+
+
+🚀 LEVEL 2: Method With Return Value
+java
+Copy
+Edit
+public class Adder {
+    public int add(int a, int b) {
+        return a + b;
+    }
+
+    public static void main(String[] args) {
+        Adder obj = new Adder();
+        int sum = obj.add(5, 7);
+        System.out.println("Sum is: " + sum);  // Output: Sum is: 12
+    }
+}
+
+
+
+🚀 LEVEL 3: Multiple Parameters, Multiple Methods
+java
+Copy
+Edit
+public class MathOperations {
+
+    public int subtract(int a, int b) {
+        return a - b;
+    }
+
+    public double divide(double x, double y) {
+        return x / y;
+    }
+
+    public static void main(String[] args) {
+        MathOperations m = new MathOperations();
+        System.out.println("Subtract: " + m.subtract(10, 4));
+        System.out.println("Divide: " + m.divide(20, 4));
+    }
+}
+
+
+
+🚀 LEVEL 6: Method Overloading
+java
+Copy
+Edit
+public class OverloadExample {
+
+    public int multiply(int a, int b) {
+        return a * b;
+    }
+
+    public double multiply(double a, double b) {
+        return a * b;
+    }
+
+    public static void main(String[] args) {
+        OverloadExample obj = new OverloadExample();
+        System.out.println(obj.multiply(2, 3));      // 6
+        System.out.println(obj.multiply(2.5, 4.0));  // 10.0
+    }
+}
+
+
+
+🔐 What is Encapsulation?
+Encapsulation means wrapping data (variables) and code (methods) into a single unit, like a capsule 💊.
+In Java, this is achieved by:
+
+Making fields private
+
+Giving public getter & setter methods to access/update them
+
+🔸 Think of it like:
+"Mobile ka internal system user se hidden hota hai, sirf buttons diye jaate hain control ke liye."
+
+✅ Example of Encapsulation
+java
+Copy
+Edit
+public class Account {
+    // Step 1: Make fields private
+    private String name;
+    private double balance;
+
+    // Step 2: Create public getters and setters
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setBalance(double amount) {
+        if (amount >= 0) {
+            this.balance = amount;
+        }
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+}
+java
+Copy
+Edit
+public class Main {
+    public static void main(String[] args) {
+        Account acc = new Account();
+
+        acc.setName("Ravi");
+        acc.setBalance(5000);
+
+        System.out.println(acc.getName());     // Ravi
+        System.out.println(acc.getBalance());  // 5000
+    }
+}
+✅ Encapsulation protects data and gives you controlled access.
+
+
+
+
+🔹 1. public: Accessible from anywhere
+java
+Copy
+Edit
+public class Car {
+    public String brand = "Honda";
+}
+java
+Copy
+Edit
+public class Main {
+    public static void main(String[] args) {
+        Car c = new Car();
+        System.out.println(c.brand);  // Accessible anywhere
+    }
+}
+🔹 2. private: Accessible only inside the same class
+java
+Copy
+Edit
+public class Bank {
+    private double balance = 1000;
+
+    public double getBalance() {
+        return balance;
+    }
+}
+java
+Copy
+Edit
+public class Main {
+    public static void main(String[] args) {
+        Bank b = new Bank();
+        // System.out.println(b.balance); ❌ Error: private
+        System.out.println(b.getBalance()); ✅ OK
+    }
+}
+🔹 3. protected: Accessible in same package + subclass (even if in different package)
+java
+Copy
+Edit
+class Animal {
+    protected String type = "Mammal";
+}
+
+class Dog extends Animal {
+    public void printType() {
+        System.out.println(type);  // ✅ Accessible
+    }
+}
+🔹 4. Default (no modifier): Accessible only within the same package
+java
+Copy
+Edit
+class Phone {
+    String model = "iPhone";  // Default access
+}
+java
+Copy
+Edit
+// Accessible only if in same package
+public class Main {
+    public static void main(String[] args) {
+        Phone p = new Phone();
+        System.out.println(p.model);  // ✅ Only if in same package
+    }
+}
+
+
+
+🧠 What are Getters and Setters?
+🔹 Getters:
+Ye methods field ki value read karne ke liye hote hain.
+
+🔹 Setters:
+Ye methods field ki value set/update karne ke liye hote hain.
+
+❗ Generally fields private hote hain (Encapsulation), aur unke access ke liye public getter/setter diye jaate hain.
+
+✅ Why Use Them Instead of Direct Access?
+java
+Copy
+Edit
+// ❌ NOT Recommended
+public class Student {
+    public String name;  // Direct access – bad practice
+}
+Isse data unsafe ho jata hai, koi bhi change kar sakta hai.
+
+Instead, use private fields + get/set methods → ✅ Safe
+
+✅ Example: Getters and Setters
+java
+Copy
+Edit
+public class Student {
+    private String name;
+    private int age;
+
+    // Getter for name
+    public String getName() {
+        return name;
+    }
+
+    // Setter for name
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    // Getter for age
+    public int getAge() {
+        return age;
+    }
+
+    // Setter for age
+    public void setAge(int age) {
+        if (age >= 0) {
+            this.age = age;
+        }
+    }
+}
+java
+Copy
+Edit
+public class Main {
+    public static void main(String[] args) {
+        Student s = new Student();
+
+        s.setName("Ravi");
+        s.setAge(20);
+
+        System.out.println("Name: " + s.getName());
+        System.out.println("Age: " + s.getAge());
+    }
+}
+
+
+
+🔹 1. Validation in Setter
+java
+Copy
+Edit
+public void setMarks(int marks) {
+    if (marks >= 0 && marks <= 100) {
+        this.marks = marks;
+    } else {
+        System.out.println("Invalid marks!");
+    }
+}
+🔹 2. Read-only Field (Only Getter)
+java
+Copy
+Edit
+private final int id = 101;
+
+public int getId() {
+    return id;  // No setter → read-only
+}
+🔹 3. Write-only Field (Only Setter)
+java
+Copy
+Edit
+private String password;
+
+public void setPassword(String password) {
+    this.password = password;
+}
+
+
+
+
+🧠 What is Inheritance?
+Inheritance means:
+🔄 "Ek class (child) dusri class (parent) ke properties and methods ko inherit kar sakti hai".
+
+In short:
+🔸 Code reuse
+🔸 Hierarchy (parent-child relationship)
+🔸 Follows "is-a" relationship
+
+✅ Syntax: extends Keyword
+java
+Copy
+Edit
+class Parent {
+    // fields and methods
+}
+
+class Child extends Parent {
+    // inherits everything from Parent
+}
+📌 extends ka matlab hota hai:
+"Ye class us parent class ke saare methods aur variables inherit karegi."
+
+🧾 Example: Basic Inheritance
+java
+Copy
+Edit
+// Parent class
+class Animal {
+    void eat() {
+        System.out.println("This animal eats food.");
+    }
+}
+
+// Child class
+class Dog extends Animal {
+    void bark() {
+        System.out.println("Dog barks.");
+    }
+}
+java
+Copy
+Edit
+public class Main {
+    public static void main(String[] args) {
+        Dog d = new Dog();
+        d.eat();   // Inherited from Animal
+        d.bark();  // Defined in Dog
+    }
+}
+
+
+
+
+✅ Types of Inheritance in Java
+Java supports Single, Multilevel, and Hierarchical Inheritance
+❌ Java does not support Multiple Inheritance with classes (to avoid ambiguity), but you can achieve it with interfaces.
+
+🔸 1. Single Inheritance
+java
+Copy
+Edit
+class A {
+    void showA() { System.out.println("Class A"); }
+}
+
+class B extends A {
+    void showB() { System.out.println("Class B"); }
+}
+🔸 2. Multilevel Inheritance
+java
+Copy
+Edit
+class A {
+    void a() { System.out.println("A"); }
+}
+
+class B extends A {
+    void b() { System.out.println("B"); }
+}
+
+class C extends B {
+    void c() { System.out.println("C"); }
+}
+java
+Copy
+Edit
+public class Main {
+    public static void main(String[] args) {
+        C obj = new C();
+        obj.a();  // from A
+        obj.b();  // from B
+        obj.c();  // from C
+    }
+}
+🔸 3. Hierarchical Inheritance
+java
+Copy
+Edit
+class Animal {
+    void eat() { System.out.println("eating..."); }
+}
+
+class Dog extends Animal {
+    void bark() { System.out.println("barking..."); }
+}
+
+class Cat extends Animal {
+    void meow() { System.out.println("meowing..."); }
+}
+❌ Why Java Doesn’t Support Multiple Inheritance with Classes
+java
+Copy
+Edit
+class A {
+    void show() { System.out.println("A"); }
+}
+
+class B {
+    void show() { System.out.println("B"); }
+}
+
+// class C extends A, B ❌ Not allowed – ambiguity
+✔️ Java solves this using interfaces, not classes.
+
+👨‍🏫 Why Java Doesn’t Support Multiple Inheritance (with classes)
+🔴 Because it causes confusion called the "Diamond Problem"
+🟡 Let’s Break It Down:
+✅ First: What is Multiple Inheritance?
+When a class inherits from more than one class, it’s called multiple inheritance.
+
+🔧 Example in C++ (which allows multiple inheritance):
+cpp
+Copy
+Edit
+class A {
+    void show();
+};
+
+class B {
+    void show();
+};
+
+class C : public A, public B {
+    // Inherits from both A and B
+};
+❓Problem: What if both A and B have the same method?
+cpp
+Copy
+Edit
+class A {
+    void show() { cout << "A"; }
+};
+
+class B {
+    void show() { cout << "B"; }
+};
+
+class C : public A, public B {
+    // Which 'show()' will C use? A or B?
+};
+This creates ambiguity/confusion. This is called the diamond problem.
+
+
+🧠 What is Inheritance?
+Inheritance means:
+🔄 "Ek class (child) dusri class (parent) ke properties and methods ko inherit kar sakti hai".
+
+🧾 Example: Basic Inheritance
+java
+Copy
+Edit
+// Parent class
+class Animal {
+    void eat() {
+        System.out.println("This animal eats food.");
+    }
+}
+
+// Child class
+class Dog extends Animal {
+    void bark() {
+        System.out.println("Dog barks.");
+    }
+}
+java
+Copy
+Edit
+public class Main {
+    public static void main(String[] args) {
+        Dog d = new Dog();
+        d.eat();   // Inherited from Animal
+        d.bark();  // Defined in Dog
+    }
+}
+
+
+
+🔄 What is Method Overriding?
+Method Overriding means:
+🔁 "Child class apne parent class ke method ko dubara define karta hai (same name, same parameters)"
+
+✅ Overriding allows custom behavior in the child class.
+
+📌 When Do We Use It?
+Jab child class parent ka method inherit karta hai
+
+But chahta hai ki apna version implement kare
+
+✅ Rules of Method Overriding
+Method name must be same
+
+Parameters must be same (signature)
+
+Must be inherited from parent class
+
+Cannot override private, static, or final methods
+
+Access modifier should be same or more visible
+
+🔧 Syntax Example:
+java
+Copy
+Edit
+class Animal {
+    void sound() {
+        System.out.println("Animal makes sound");
+    }
+}
+
+class Dog extends Animal {
+    @Override
+    void sound() {
+        System.out.println("Dog barks");
+    }
+}
+java
+Copy
+Edit
+public class Main {
+    public static void main(String[] args) {
+        Animal a = new Dog();  // Polymorphism
+        a.sound();  // Output: Dog barks
+    }
+}
+
+
+ Explanation:
+sound() method is defined in parent class Animal
+
+Dog overrides that method to give custom behavior
+
+✅ We use @Override annotation for clarity (optional, but recommended)
+
+
+
+🔀 Super Keyword with Overriding
+Use super.method() to call parent method inside overridden method.
+
+java
+Copy
+Edit
+class Parent {
+    void greet() {
+        System.out.println("Hello from Parent");
+    }
+}
+
+class Child extends Parent {
+    @Override
+    void greet() {
+        super.greet();  // calls parent version
+        System.out.println("Hello from Child");
+    }
+}
+
+
+
+
+✅ Advanced Example: Polymorphism with Overriding
+java
+Copy
+Edit
+class Shape {
+    void draw() {
+        System.out.println("Drawing shape");
+    }
+}
+
+class Circle extends Shape {
+    void draw() {
+        System.out.println("Drawing circle");
+    }
+}
+
+class Square extends Shape {
+    void draw() {
+        System.out.println("Drawing square");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Shape s;
+
+        s = new Circle();
+        s.draw(); // Drawing circle
+
+        s = new Square();
+        s.draw(); // Drawing square
+    }
+}
+
+
+
+🔠 What is super keyword?
+Java me super ka use child class se parent class ke members (variables, methods, constructor) ko refer karne ke liye hota hai.
+
+🔹 Jab child aur parent class me same naam ke methods ya variables hote hain, tab super se parent version ko call kar sakte ho.
+
+✅ Uses of super keyword:
+Use Case	Example
+1️⃣ Call parent class method	super.methodName()
+2️⃣ Access parent class variable	super.variableName
+3️⃣ Call parent constructor	super() (must be 1st line in constructor)
+
+
+
+✅ 1. super.method() – Call parent method
+java
+Copy
+Edit
+class Animal {
+    void sound() {
+        System.out.println("Animal makes sound");
+    }
+}
+
+class Dog extends Animal {
+    void sound() {
+        super.sound();  // 🔹 Call parent method
+        System.out.println("Dog barks");
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Dog d = new Dog();
+        d.sound();
+    }
+}
+Output:
+Animal makes sound
+Dog barks
+
+
+✅ 2. super.variable – Access parent variable
+
+class Parent {
+    int x = 100;
+}
+
+class Child extends Parent {
+    int x = 200;
+
+    void show() {
+        System.out.println("Child x: " + x);         // 200
+        System.out.println("Parent x: " + super.x);  // 100
+    }
+}
+java
+Copy
+Edit
+public class Main {
+    public static void main(String[] args) {
+        Child c = new Child();
+        c.show();
+    }
+}
+
+✅ 3. super() – Call parent constructor
+java
+Copy
+Edit
+class Parent {
+    Parent() {
+        System.out.println("Parent constructor");
+    }
+}
+
+class Child extends Parent {
+    Child() {
+        super(); // 🔹 Call to parent constructor
+        System.out.println("Child constructor");
+    }
+}
+java
+Copy
+Edit
+public class Main {
+    public static void main(String[] args) {
+        Child c = new Child();
+    }
+}
+🔍 Output:
+kotlin
+Copy
+Edit
+Parent constructor  
+Child constructor
+
+✅ super() always first line in child constructor.
+Agar na likho, Java automatically call karta hai super() (default constructor).

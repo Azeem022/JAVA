@@ -1263,3 +1263,292 @@ Static block executed.
 Main method executed.
 🧠 Use static blocks to initialize static variables or perform setup logic before the main method.
 
+
+
+
+🔶 What is a Package?
+A package in Java is a namespace that groups related classes and interfaces together.
+
+Think of it like folders on your computer:
+
+📁 java.util → for utility classes
+
+📁 java.io → for input/output classes
+
+🔸 Why Use Packages?
+✅ Avoid name conflicts
+✅ Organize code better
+✅ Control access (with access modifiers)
+✅ Reusability and modularization
+
+🔸 Types of Packages
+1. Built-in Packages – Provided by Java
+Examples:
+
+java
+Copy
+Edit
+import java.util.Scanner;
+import java.io.File;
+import java.lang.Math;  // automatically imported
+2. User-defined Packages – Created by you
+🔹 How to Create a User-defined Package
+✅ Step-by-step:
+1. Create a package
+java
+Copy
+Edit
+// File: MyPackage/Message.java
+package MyPackage;
+
+public class Message {
+    public void show() {
+        System.out.println("Hello from MyPackage!");
+    }
+}
+2. Use the package
+java
+Copy
+Edit
+// File: Main.java
+import MyPackage.Message;
+
+public class Main {
+    public static void main(String[] args) {
+        Message m = new Message();
+        m.show();
+    }
+}
+
+import java.util.Scanner;          // Import a single class
+import java.util.*;                // Import all classes in java.util
+import static java.lang.Math.*;    // Static import (for static members)
+
+
+
+🔶 What is Exception Handling?
+An exception is an unexpected event that disrupts the normal flow of a program.
+
+Exception Handling is Java’s mechanism to:
+
+Detect errors
+
+Handle them gracefully (without crashing)
+
+Maintain program flow
+
+🔸 Why Use Exception Handling?
+✅ Prevent program from crashing
+✅ Separate error-handling logic from main logic
+✅ Handle runtime errors (like divide by zero, file not found)
+
+🔶 Types of Exceptions
+Java has two main types:
+
+Type	Description	Example
+Checked	Caught at compile time	IOException, SQLException
+Unchecked	Caught at runtime	ArithmeticException, NullPointerException
+
+🔶 Basic Syntax
+java
+Copy
+Edit
+try {
+    // risky code
+} catch (ExceptionType name) {
+    // handling code
+} finally {
+    // optional block; always executes
+}
+🔸 📌 Example 1: Handling Divide by Zero
+java
+Copy
+Edit
+public class Divide {
+    public static void main(String[] args) {
+        try {
+            int a = 10 / 0; // Risky
+        } catch (ArithmeticException e) {
+            System.out.println("Cannot divide by zero!");
+        }
+    }
+}
+🔍 Output:
+csharp
+Copy
+Edit
+Cannot divide by zero!
+🔸 📌 Example 2: Multiple Catch Blocks
+java
+Copy
+Edit
+public class MultipleCatch {
+    public static void main(String[] args) {
+        try {
+            int[] arr = new int[3];
+            arr[5] = 10;  // ArrayIndexOutOfBoundsException
+        } catch (ArithmeticException e) {
+            System.out.println("Math error.");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Array index error.");
+        } catch (Exception e) {
+            System.out.println("General error.");
+        }
+    }
+}
+Always catch specific exceptions first, then general ones.
+
+🔸 📌 Example 3: The finally Block
+java
+Copy
+Edit
+public class FinallyBlock {
+    public static void main(String[] args) {
+        try {
+            System.out.println("Inside try");
+        } catch (Exception e) {
+            System.out.println("Exception caught");
+        } finally {
+            System.out.println("This always runs!");
+        }
+    }
+}
+finally is used to close resources, like files or database connections.
+
+
+
+🔸 📌 Example 4: throw Keyword
+Manually throw an exception.
+
+java
+Copy
+Edit
+public class ThrowExample {
+    public static void main(String[] args) {
+        int age = 15;
+        if (age < 18) {
+            throw new ArithmeticException("Not eligible to vote");
+        }
+    }
+}
+
+
+
+🔸 📌 Example 5: throws Keyword
+Tell the compiler that a method may throw an exception.
+
+java
+Copy
+Edit
+import java.io.*;
+
+public class ThrowsExample {
+    public static void readFile() throws IOException {
+        FileReader fr = new FileReader("file.txt");
+        fr.read();
+    }
+
+    public static void main(String[] args) throws IOException {
+        readFile();  // caller is responsible
+    }
+}
+
+🔶 What is Java Collections Framework?
+The Java Collections Framework (JCF) is a set of classes and interfaces in java.util for storing, retrieving, and manipulating groups of data.
+
+Think of it like Java's built-in toolbox for:
+
+Lists 📋
+
+Sets ✅
+
+Maps 🗺️
+
+Queues ⏳
+
+Stacks 📚
+
+1. List – Ordered, allows duplicates
+Implementations: ArrayList, LinkedList, Vector, Stack
+
+1️⃣ ArrayList – Most commonly used list
+🔧 Internally:
+Uses a resizable array
+
+Fast for accessing elements (get(), set())
+
+import java.util.*;
+
+public class ArrayListExample {
+    public static void main(String[] args) {
+        List<String> list = new ArrayList<>();
+        list.add("Java");
+        list.add("Python");
+        list.add("Java"); // duplicates allowed
+
+        System.out.println(list); // [Java, Python, Java]
+    }
+}
+
+
+2️⃣ LinkedList – Good for insertions/deletions
+🔧 Internally:
+Uses a doubly linked list
+
+Nodes have reference to next and previous
+
+import java.util.*;
+
+public class LinkedListExample {
+    public static void main(String[] args) {
+        List<String> list = new LinkedList<>();
+        list.add("Node1");
+        list.add("Node2");
+        list.add("Node3");
+
+        System.out.println(list); // [Node1, Node2, Node3]
+    }
+}
+
+✅ Best Use:
+When you need to insert/delete a lot
+
+Use as a queue or deque
+
+3️⃣ Vector – Thread-safe ArrayList
+🔧 Internally:
+Like ArrayList but synchronized
+
+import java.util.*;
+
+public class VectorExample {
+    public static void main(String[] args) {
+        Vector<Integer> vec = new Vector<>();
+        vec.add(1);
+        vec.add(2);
+        vec.add(3);
+
+        System.out.println(vec); // [1, 2, 3]
+    }
+}
+
+
+4️⃣ Stack – LIFO structure (Last-In, First-Out)
+🔧 Internally:
+Extends Vector
+
+Has LIFO methods: push(), pop(), peek()
+
+import java.util.*;
+
+public class StackExample {
+    public static void main(String[] args) {
+        Stack<String> stack = new Stack<>();
+        stack.push("A");
+        stack.push("B");
+        stack.push("C");
+
+        System.out.println(stack.pop()); // C
+        System.out.println(stack.peek()); // B
+    }
+}

@@ -873,3 +873,393 @@ Child constructor
 
 ✅ super() always first line in child constructor.
 Agar na likho, Java automatically call karta hai super() (default constructor).
+
+
+
+
+🔶 What is Polymorphism?
+Polymorphism means "many forms". In Java, it allows objects to take on many forms, specifically:
+
+Compile-Time Polymorphism (Method Overloading)
+
+Run-Time Polymorphism (Method Overriding)
+
+
+
+✅ What is Method Overloading?
+When multiple methods in the same class have the same name but different parameters (type or number), it's called method overloading.
+
+📌 Example:
+java
+Copy
+Edit
+public class Calculator {
+    // Adding two integers
+    public int add(int a, int b) {
+        return a + b;
+    }
+
+    // Adding three integers
+    public int add(int a, int b, int c) {
+        return a + b + c;
+    }
+
+    // Adding two doubles
+    public double add(double a, double b) {
+        return a + b;
+    }
+
+    public static void main(String[] args) {
+        Calculator calc = new Calculator();
+        System.out.println(calc.add(2, 3));           // 5
+        System.out.println(calc.add(2, 3, 4));        // 9
+        System.out.println(calc.add(2.5, 3.5));       // 6.0
+    }
+}
+🔸 Part 2: Run-Time Polymorphism (Method Overriding)
+✅ What is Method Overriding?
+When a subclass provides its own implementation of a method defined in its superclass, it's called method overriding. This happens at runtime.
+
+🧠 Key Conditions:
+Method must have same name, return type, and parameters.
+
+The class must use inheritance (extends).
+
+Use @Override annotation (optional but recommended).
+
+📌 Example:
+java
+Copy
+Edit
+class Animal {
+    void sound() {
+        System.out.println("Animal makes a sound");
+    }
+}
+
+class Dog extends Animal {
+    @Override
+    void sound() {
+        System.out.println("Dog barks");
+    }
+}
+
+class Cat extends Animal {
+    @Override
+    void sound() {
+        System.out.println("Cat meows");
+    }
+}
+
+public class TestPolymorphism {
+    public static void main(String[] args) {
+        Animal a;          // reference of superclass
+
+        a = new Dog();     // Dog object
+        a.sound();         // Dog barks
+
+        a = new Cat();     // Cat object
+        a.sound();         // Cat meows
+    }
+}
+🔍 Output:
+nginx
+Copy
+Edit
+Dog barks
+Cat meows
+🔸 Part 3: Polymorphism with Interfaces
+✅ Interface Polymorphism
+Interfaces support polymorphism because a class can be referred to by its interface type.
+
+📌 Example:
+java
+Copy
+Edit
+interface Shape {
+    void draw();
+}
+
+class Circle implements Shape {
+    public void draw() {
+        System.out.println("Drawing Circle");
+    }
+}
+
+class Rectangle implements Shape {
+    public void draw() {
+        System.out.println("Drawing Rectangle");
+    }
+}
+
+public class InterfacePolymorphism {
+    public static void main(String[] args) {
+        Shape s;
+
+        s = new Circle();
+        s.draw();  // Drawing Circle
+
+        s = new Rectangle();
+        s.draw();  // Drawing Rectangle
+    }
+}
+🔸 Part 4: Advanced Polymorphism – Real-World Example
+🧾 Example: Payment System
+java
+Copy
+Edit
+abstract class Payment {
+    abstract void pay(double amount);
+}
+
+class CreditCard extends Payment {
+    void pay(double amount) {
+        System.out.println("Paid $" + amount + " using Credit Card.");
+    }
+}
+
+class PayPal extends Payment {
+    void pay(double amount) {
+        System.out.println("Paid $" + amount + " using PayPal.");
+    }
+}
+
+class Cash extends Payment {
+    void pay(double amount) {
+        System.out.println("Paid $" + amount + " in Cash.");
+    }
+}
+
+public class PaymentProcessor {
+    public static void processPayment(Payment p, double amount) {
+        p.pay(amount); // Polymorphic call
+    }
+
+    public static void main(String[] args) {
+        processPayment(new CreditCard(), 100.0);
+        processPayment(new PayPal(), 250.0);
+        processPayment(new Cash(), 50.0);
+    }
+}
+🔸 Part 5: Polymorphism in Collections (Advanced Concept)
+java
+Copy
+Edit
+import java.util.ArrayList;
+
+abstract class Animal {
+    abstract void makeSound();
+}
+
+class Dog extends Animal {
+    void makeSound() {
+        System.out.println("Bark");
+    }
+}
+
+class Cat extends Animal {
+    void makeSound() {
+        System.out.println("Meow");
+    }
+}
+
+public class Zoo {
+    public static void main(String[] args) {
+        ArrayList<Animal> animals = new ArrayList<>();
+        animals.add(new Dog());
+        animals.add(new Cat());
+
+        for (Animal a : animals) {
+            a.makeSound();  // Dynamic method dispatch
+        }
+    }
+}
+
+
+
+
+🔶 What is Abstraction?
+Abstraction is one of the four pillars of Object-Oriented Programming (OOP), and it means hiding the internal implementation and showing only the necessary details to the user.
+
+📦 Think of abstraction like using a TV remote:
+You press buttons to change channels (interface), but you don't know how the circuit board inside works (implementation).
+
+🔸 Why Use Abstraction?
+To simplify complexity.
+
+To hide implementation details.
+
+To provide a blueprint for subclasses.
+
+To enforce rules and contracts using abstract classes or interfaces.
+
+🔸 How Abstraction is Achieved in Java
+Java achieves abstraction in two ways:
+
+Abstract Classes (Partial Abstraction)
+
+Interfaces (Full Abstraction, before Java 8)
+
+🔹 1. Abstract Classes
+✅ Definition:
+Declared using the abstract keyword.
+
+Can have abstract (no body) and non-abstract (implemented) methods.
+
+Cannot be instantiated directly.
+
+📌 Basic Example:
+java
+Copy
+Edit
+abstract class Animal {
+    abstract void sound();  // abstract method
+
+    void sleep() {          // concrete method
+        System.out.println("Animal is sleeping...");
+    }
+}
+
+class Dog extends Animal {
+    void sound() {
+        System.out.println("Dog barks");
+    }
+}
+
+public class TestAbstraction {
+    public static void main(String[] args) {
+        Animal a = new Dog();
+        a.sound();  // Dog barks
+        a.sleep();  // Animal is sleeping...
+    }
+}
+🔐 Rules of Abstract Class
+If a class has at least one abstract method, it must be declared abstract.
+
+Subclasses must override all abstract methods, or they themselves become abstract.
+
+ 2. Interfaces
+✅ Definition:
+An interface is a contract for classes to follow.
+
+Can only have abstract methods (until Java 7), and default/static methods (Java 8+).
+
+A class implements an interface.
+
+📌 Example:
+java
+Copy
+Edit
+interface Shape {
+    void draw();  // abstract method
+}
+
+class Circle implements Shape {
+    public void draw() {
+        System.out.println("Drawing Circle");
+    }
+}
+
+class Square implements Shape {
+    public void draw() {
+        System.out.println("Drawing Square");
+    }
+}
+
+public class InterfaceExample {
+    public static void main(String[] args) {
+        Shape s = new Circle();
+        s.draw();  // Drawing Circle
+
+        s = new Square();
+        s.draw();  // Drawing Square
+    }
+}
+
+
+
+
+🔶 What Are Static Members?
+In Java, static members belong to the class rather than to instances (objects) of the class.
+
+You can declare:
+
+static variables (also called class variables)
+
+static methods
+
+static blocks
+
+
+
+
+🔸 1. Static Variables (Class Variables)
+A static variable is shared among all instances of a class. There's only one copy in memory.
+
+📌 Example:
+java
+Copy
+Edit
+class Counter {
+    static int count = 0;  // shared among all objects
+
+    Counter() {
+        count++;  // increments shared variable
+        System.out.println("Count: " + count);
+    }
+
+    public static void main(String[] args) {
+        new Counter();  // Count: 1
+        new Counter();  // Count: 2
+        new Counter();  // Count: 3
+    }
+}
+🧠 Notice: All objects update the same count variable.
+
+🔸 2. Static Methods
+Static methods belong to the class, not the object. You can call them without creating an instance.
+
+✅ Key Rules:
+Can only access static data directly.
+
+Cannot use this or super.
+
+Often used for utility or helper methods.
+
+📌 Example:
+java
+Copy
+Edit
+class MathUtils {
+    static int square(int x) {
+        return x * x;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(MathUtils.square(5));  // 25
+    }
+}
+🔸 3. Static Block (Static Initializer)
+Static blocks run once, when the class is first loaded into memory.
+
+📌 Example:
+java
+Copy
+Edit
+class Demo {
+    static {
+        System.out.println("Static block executed.");
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Main method executed.");
+    }
+}
+🔍 Output:
+scss
+Copy
+Edit
+Static block executed.
+Main method executed.
+🧠 Use static blocks to initialize static variables or perform setup logic before the main method.
+

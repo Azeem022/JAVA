@@ -1552,3 +1552,393 @@ public class StackExample {
         System.out.println(stack.peek()); // B
     }
 }
+
+
+
+ What is a Set in Java?
+Set is a collection that does not allow duplicate elements.
+It’s part of the java.util package and extends the Collection interface.
+
+🔍 When to use Set?
+When you want unique values only (no duplicates)
+
+When you don’t care about order → use HashSet
+
+When you want insertion order → use LinkedHashSet
+
+When you want sorted data → use TreeSet
+
+
+
+1️⃣ HashSet
+Uses hashing for storage
+
+Unordered
+
+Fast operations: add, remove, contains (O(1))
+
+java
+Copy
+Edit
+import java.util.*;
+
+public class HashSetExample {
+    public static void main(String[] args) {
+        Set<String> set = new HashSet<>();
+        set.add("Apple");
+        set.add("Banana");
+        set.add("Apple");  // duplicate
+
+        System.out.println(set); // [Banana, Apple] (order not guaranteed)
+    }
+}
+2️⃣ LinkedHashSet
+Maintains insertion order
+
+Still doesn’t allow duplicates
+
+java
+Copy
+Edit
+Set<String> set = new LinkedHashSet<>();
+set.add("A");
+set.add("B");
+set.add("A"); // ignored
+
+System.out.println(set); // [A, B]
+3️⃣ TreeSet
+Stores elements in sorted order (ascending by default)
+
+Internally uses a Red-Black Tree
+
+Does not allow null (throws exception)
+
+java
+Copy
+Edit
+Set<Integer> set = new TreeSet<>();
+set.add(50);
+set.add(10);
+set.add(30);
+
+System.out.println(set); // [10, 30, 50]
+You can also sort custom objects using a Comparator.
+
+
+
+🔹 What is a Map in Java?
+A Map is a collection that stores data in the form of key-value pairs.
+
+Each key is unique
+
+Each key maps to one value
+
+You can retrieve a value using its key
+
+
+
+1️⃣ HashMap – Most commonly used Map
+java
+Copy
+Edit
+import java.util.*;
+
+public class HashMapExample {
+    public static void main(String[] args) {
+        Map<String, Integer> map = new HashMap<>();
+
+        map.put("Apple", 2);
+        map.put("Banana", 5);
+        map.put("Apple", 4);  // overwrites previous value
+
+        System.out.println(map); // {Banana=5, Apple=4}
+    }
+}
+No order
+
+Fast lookup and insertion (O(1))
+
+One null key allowed
+
+2️⃣ LinkedHashMap – Maintains insertion order
+java
+Copy
+Edit
+Map<String, Integer> map = new LinkedHashMap<>();
+map.put("One", 1);
+map.put("Two", 2);
+map.put("Three", 3);
+
+System.out.println(map); // {One=1, Two=2, Three=3}
+Keeps the order you insert keys in
+
+Good for predictable iteration
+
+3️⃣ TreeMap – Sorted by key
+java
+Copy
+Edit
+Map<String, Integer> map = new TreeMap<>();
+map.put("B", 20);
+map.put("A", 10);
+map.put("C", 30);
+
+System.out.println(map); // {A=10, B=20, C=30}
+Sorted by natural order of keys (String, Integer, etc.)
+
+No null key allowed
+
+4️⃣ Hashtable – Legacy, thread-safe version of HashMap
+java
+Copy
+Edit
+Map<String, String> map = new Hashtable<>();
+map.put("username", "admin");
+map.put("password", "1234");
+
+System.out.println(map); // {username=admin, password=1234}
+All methods synchronized
+
+Slower than HashMap
+
+❌ No null keys or null values
+
+
+
+
+
+
+📦 Queue and Deque in Java
+Both Queue and Deque are part of the Java Collection Framework and are used to store ordered elements, but they follow different insertion/removal rules.
+
+1️⃣ Queue – First In, First Out (FIFO)
+The element added first is removed first
+
+Like a line at a ticket counter
+
+🔑 Key Operations:
+Method	Description
+add()	Adds an element (throws exception if full)
+offer()	Adds an element (returns false if full)
+remove()	Removes the head (throws exception if empty)
+poll()	Removes the head (returns null if empty)
+peek()	Gets the head without removing it
+
+🛠️ Common Implementations:
+Class	Ordered?	Thread-safe?	Null Allowed?
+LinkedList	✅ Yes	❌ No	✅
+PriorityQueue	❌ Sorted by priority	❌ No	❌
+ArrayDeque	✅ Yes	❌ No	❌
+
+✅ Example: Queue using LinkedList
+java
+Copy
+Edit
+import java.util.*;
+
+public class QueueExample {
+    public static void main(String[] args) {
+        Queue<String> queue = new LinkedList<>();
+
+        queue.offer("A");
+        queue.offer("B");
+        queue.offer("C");
+
+        System.out.println(queue.poll()); // A
+        System.out.println(queue.peek()); // B
+        System.out.println(queue);        // [B, C]
+    }
+}
+2️⃣ Deque – Double-Ended Queue
+You can add/remove from both ends
+
+Think of it like a queue with 2 doors
+
+🔑 Key Methods:
+Method	From Front	From Rear
+addFirst()	Inserts at front	
+addLast()		Inserts at rear
+removeFirst()	Removes from front	
+removeLast()		Removes from rear
+peekFirst()	View front	
+peekLast()		View rear
+
+✅ Example: Deque using ArrayDeque
+java
+Copy
+Edit
+import java.util.*;
+
+public class DequeExample {
+    public static void main(String[] args) {
+        Deque<String> deque = new ArrayDeque<>();
+
+        deque.addFirst("Front");
+        deque.addLast("Rear");
+        deque.addFirst("NewFront");
+
+        System.out.println(deque); // [NewFront, Front, Rear]
+
+        System.out.println(deque.removeLast()); // Rear
+    }
+}
+🧠 Summary Table
+Feature	Queue	Deque
+Direction	One end (FIFO)	Both ends (LIFO & FIFO)
+Insertion	Rear only	Front and Rear
+Removal	Front only	Front and Rear
+Common Uses	Printer queue, customer line	Undo/Redo, Palindrome checker
+
+🔶 Important Methods (Collection Interface)
+Method	Description
+add(E e)	Add element
+remove(Object o)	Remove element
+contains(Object o)	Check if exists
+isEmpty()	Is the collection empty?
+size()	Total number of elements
+clear()	Removes all elements
+iterator()	Returns an Iterator
+
+🔸 Iterating Over Collections
+🔁 1. Enhanced for-loop
+java
+Copy
+Edit
+for (String name : names) {
+    System.out.println(name);
+}
+🔁 2. Iterator
+java
+Copy
+Edit
+Iterator<String> it = names.iterator();
+while (it.hasNext()) {
+    System.out.println(it.next());
+}
+🔸 Sorting Collections
+java
+Copy
+Edit
+List<String> cities = new ArrayList<>();
+cities.add("Delhi");
+cities.add("Mumbai");
+cities.add("Chennai");
+
+Collections.sort(cities);  // Sort alphabetically
+✅ Use Collections.sort() or List.sort()
+
+🔸 Advanced: Custom Sorting with Comparator
+java
+Copy
+Edit
+List<Integer> nums = Arrays.asList(5, 2, 8, 1);
+
+Collections.sort(nums, (a, b) -> b - a);  // Descending order
+
+System.out.println(nums);  // [8, 5, 2, 1]
+
+
+
+
+Great! Let's dive into Wrapper Classes in Java — an essential topic when working with collections, parsing, and converting between primitive types and objects.
+
+🔶 What Are Wrapper Classes?
+In Java, wrapper classes are object representations of primitive data types.
+
+Primitive Type	Wrapper Class
+byte	Byte
+short	Short
+int	Integer
+long	Long
+float	Float
+double	Double
+char	Character
+boolean	Boolean
+
+🔸 Why Use Wrapper Classes?
+✅ Needed when working with collections (ArrayList<int> is invalid; must use Integer)
+✅ Provide utility methods (e.g., parsing, converting, comparing)
+✅ Enable autoboxing and unboxing (automatic conversion between primitives and objects)
+
+🔶 Autoboxing and Unboxing
+🔁 Autoboxing – primitive → wrapper
+java
+Copy
+Edit
+int a = 10;
+Integer obj = a;  // Automatically boxed
+🔁 Unboxing – wrapper → primitive
+java
+Copy
+Edit
+Integer obj = 20;
+int b = obj;      // Automatically unboxed
+🔸 📌 Example: Using Wrapper with Collections
+java
+Copy
+Edit
+List<Integer> nums = new ArrayList<>();
+nums.add(5);       // Autoboxed: int → Integer
+int x = nums.get(0);  // Unboxed: Integer → int
+🔶 Wrapper Class Methods
+🔍 parseXXX(String s) – converts string to primitive
+java
+Copy
+Edit
+int x = Integer.parseInt("123");
+double d = Double.parseDouble("3.14");
+🔍 valueOf(String s) – converts string to wrapper object
+java
+Copy
+Edit
+Integer y = Integer.valueOf("123");
+Boolean b = Boolean.valueOf("true");
+🔍 toString() – converts value to string
+java
+Copy
+Edit
+int z = 42;
+String s = Integer.toString(z);
+🔶 Common Use Cases
+✅ Parsing Input
+java
+Copy
+Edit
+String ageStr = "25";
+int age = Integer.parseInt(ageStr);
+✅ Converting to/from Strings
+java
+Copy
+Edit
+int number = 50;
+String numStr = String.valueOf(number);  // "50"
+✅ Working with Collections
+java
+Copy
+Edit
+ArrayList<Boolean> flags = new ArrayList<>();
+flags.add(Boolean.TRUE);
+🔶 Wrapper vs Primitive Summary
+Feature	Primitive	Wrapper
+Memory-efficient	✅	❌ (more overhead)
+Can be null	❌	✅
+Used in collections	❌	✅
+Has methods	❌	✅
+
+🔸 📌 Advanced: Comparing Wrapper Objects
+java
+Copy
+Edit
+Integer a = 1000;
+Integer b = 1000;
+System.out.println(a == b);        // false (different objects)
+System.out.println(a.equals(b));   // true (values are equal)
+⚠️ For values between -128 and 127, Java caches Integer objects — so == might return true.
+
+🔶 Bonus: Converting Wrapper → Primitive → Wrapper
+java
+Copy
+Edit
+Double d = Double.valueOf(4.5);   // String to Wrapper
+double val = d.doubleValue();     // Wrapper to primitive
+Float f = (float) val;            // Primitive to another Wrapper

@@ -1,5 +1,18 @@
 ==================================What is a method in Java programming?
- Java Method is a collection of statements that perform some specific task and return the result to the caller. 
+In Java programming, a method is a block of code that performs a specific task and can be called whenever needed.
+
+public class Calculator {
+    // method with parameters and return type
+    int add(int a, int b) {
+        return a + b;
+    }
+
+    public static void main(String[] args) {
+        Calculator calc = new Calculator();
+        int result = calc.add(5, 7); // calling method
+        System.out.println("Sum: " + result);
+    }
+}
 
 
 ===================What are parts of method in Java?

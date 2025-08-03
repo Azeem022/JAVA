@@ -60,9 +60,6 @@ class GFG {
     }
 }
 ================================Static Method vs Instance Method in Java
-Last Updated : 02 Jan, 2025
-In Java, methods are mainly divided into two parts based on how they are associated with a class, which are the static method and the Instance method. The main difference between static and instance methods is:
-
 Static method: This method belongs to the class and can be called without creating an object.
 Memory Allocation of Static Methods: Static methods belong to the class, not its objects, and they are stored in the Permanent Generation space of the heap. Their local variables and arguments are stored in the stack. They can be called without creating an instance of the class, using ClassName.methodName(args).
 

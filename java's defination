@@ -61,7 +61,19 @@ class GFG {
 }
 ================================Static Method vs Instance Method in Java
 Static method: This method belongs to the class and can be called without creating an object.
-Memory Allocation of Static Methods: Static methods belong to the class, not its objects, and they are stored in the Permanent Generation space of the heap. Their local variables and arguments are stored in the stack. They can be called without creating an instance of the class, using ClassName.methodName(args).
+Memory Allocation of Static Methods: Static methods belong to the class, not its objects, and they are stored in the Permanent Generation space of the heap. Their local variables and
+arguments are stored in the stack. They can be called without creating an instance of the class, using ClassName.methodName(args).
+
+Memory Allocation
+
+Static method
+
+Stored in Method Area (PermGen space in Java 7 and earlier, replaced by Metaspace in Java 8+)
+
+Instance method
+
+
+Stored in Method Area (PermGen/Metaspace)
 
 Important Points:
 
@@ -71,7 +83,8 @@ If both superclass and subclass have static methods with the same name, it is ca
 
 
 Instance method: This method belongs to an object and requires an object to be called.
-Memory Allocation of Instance Method: Instance methods are stored in the Permanent Generation space of the heap (till Java 7, replaced by Metaspace from Java 8 for better efficiency). Their parameters, local variables, and return values are allocated on the stack. They can be called within their class or from other classes, based on their access modifiers.
+Memory Allocation of Instance Method: Instance methods are stored in the Permanent Generation space of the heap (till Java 7, replaced by Metaspace from Java 8 for better efficiency).
+Their parameters, local variables, and return values are allocated on the stack. They can be called within their class or from other classes, based on their access modifiers.
 
 Important Points:
 
